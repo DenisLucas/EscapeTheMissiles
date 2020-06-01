@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://misseis.tscn" type="PackedScene" id=2]
@@ -7,12 +7,181 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 129.873, 10 )
 
+[sub_resource type="Animation" id=2]
+resource_name = "left_to_right"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -41.8845, 26.4016 ), Vector2( -8, 24 ), Vector2( 300, 26.402 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 90.0, 90.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "right_to_left"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 280, 24 ), Vector2( 248, 24 ), Vector2( -40, 24 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "left_to_right"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -41.8845, 26.4016 ), Vector2( -8, 24 ), Vector2( 300, 26.402 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 90.0, 90.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "right_to_left"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 280, 24 ), Vector2( 248, 24 ), Vector2( -40, 24 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "left_right_down"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -40, 123.116 ), Vector2( -6, 123.116 ), Vector2( 300, 123.116 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 90.0, 90.0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "right_left_down"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 280, 120 ), Vector2( -40, 120 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -90.0, -90.0 ]
+}
+
 [node name="main" type="Node2D"]
 script = ExtResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 123.468, 24 )
+collision_mask = 2
 
 [node name="walls" type="StaticBody2D" parent="."]
 position = Vector2( 123.468, -3.83168 )
 collision_mask = 4
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
 shape = SubResource( 1 )
@@ -31,11 +200,38 @@ position = Vector2( 122.269, 77.5209 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 93.5658, 107.116 )
-collision_mask = 2
-
 [node name="misseis" parent="." instance=ExtResource( 2 )]
-position = Vector2( -2.78811, 104.594 )
+position = Vector2( -41.8845, 26.4016 )
 rotation = 1.5708
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="misseis"]
+anims/left_to_right = SubResource( 2 )
+anims/right_to_left = SubResource( 3 )
+
+[node name="misseis2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 280, 24 )
+rotation = -1.5708
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="misseis2"]
+anims/left_to_right = SubResource( 4 )
+anims/right_to_left = SubResource( 5 )
+
+[node name="misseis3" parent="." instance=ExtResource( 2 )]
+position = Vector2( -40, 123.116 )
+rotation = 1.5708
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="misseis3"]
+anims/left_right_down = SubResource( 6 )
+
+[node name="misseis4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 280, 120 )
+rotation = -1.5708
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="misseis4"]
+anims/right_left_down = SubResource( 7 )
+
+[node name="MissileTimer" type="Timer" parent="."]
+wait_time = 2.014
+one_shot = true
 [connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="timeout" from="MissileTimer" to="." method="_on_MissileTimer_timeout"]
