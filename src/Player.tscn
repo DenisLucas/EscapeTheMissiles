@@ -13,13 +13,15 @@
 script/source = "extends KinematicBody2D
 
 signal hit
-var speed = 10
+var speed = 100
 var velocidade = Vector2()
 
 func _physics_process(delta: float) -> void:
 	velocidade = get_input()
 	velocidade = velociade_calc(velocidade, speed)
+	velocidade = velocidade * delta
 	velocidade = move_and_collide(velocidade)
+
 func get_input() -> Vector2:
 	var velociade = Vector2()
 	if Input.is_action_pressed(\"ui_left\"):
@@ -44,7 +46,8 @@ func velociade_calc(velocidade, speed) -> Vector2:
 
 
 func _on_dead_body_entered(body: Node) -> void:
-	emit_signal(\"hit\")
+	if body.name == \"misseis\":
+		emit_signal(\"hit\")
 "
 
 [sub_resource type="SpriteFrames" id=1]
@@ -55,14 +58,15 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 1.17461, 13.922 )
+
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8.25947, 12.1087 )
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 15.9014
-
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 147.566, 68.116 )
+position = Vector2( 162.618, 34.2482 )
+collision_mask = 4
 script = SubResource( 4 )
 __meta__ = {
 "_edit_group_": true
@@ -71,16 +75,21 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1.63125, 1.01954 )
-shape = SubResource( 2 )
+position = Vector2( -12.2006, 0.225933 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 8.81149, 0.903744 )
+shape = SubResource( 5 )
 
 [node name="dead" type="Area2D" parent="."]
-position = Vector2( -1.63125, 1.01954 )
+position = Vector2( -1.63126, 1.01953 )
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dead"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 [connection signal="body_entered" from="dead" to="." method="_on_dead_body_entered"]

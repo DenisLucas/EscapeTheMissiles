@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/missile/missile 4.png" type="Texture" id=1]
 [ext_resource path="res://assets/missile/missile 3.png" type="Texture" id=2]
 [ext_resource path="res://assets/missile/missile 2.png" type="Texture" id=3]
 [ext_resource path="res://assets/missile/missile 5.png" type="Texture" id=4]
+[ext_resource path="res://misseis.gd" type="Script" id=5]
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -17,8 +18,10 @@ animations = [ {
 radius = 4.74239
 height = 32.9963
 
-[node name="misseis" type="RigidBody2D"]
-gravity_scale = 0.0
+[node name="misseis" type="KinematicBody2D"]
+position = Vector2( 93.2772, 170.798 )
+collision_mask = 2
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -26,9 +29,18 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -0.611723, -0.81563 )
+scale = Vector2( 1, 2.20305 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1.01954, -0.611721 )
+position = Vector2( -1.01953, -0.611725 )
 shape = SubResource( 3 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( -0.611723, 11.2149 )
+[node name="Timer" type="Timer" parent="." groups=[
+"misseis",
+]]
+wait_time = 0.5
+one_shot = true
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
