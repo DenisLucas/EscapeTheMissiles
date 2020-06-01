@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/space ship/space ship 4.png" type="Texture" id=1]
 [ext_resource path="res://assets/space ship/space ship 1.png" type="Texture" id=2]
@@ -8,6 +8,44 @@
 [ext_resource path="res://assets/space ship/space ship 7.png" type="Texture" id=6]
 [ext_resource path="res://assets/space ship/space ship 2.png" type="Texture" id=7]
 [ext_resource path="res://assets/space ship/space ship 3.png" type="Texture" id=8]
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends KinematicBody2D
+
+signal hit
+var speed = 10
+var velocidade = Vector2()
+
+func _physics_process(delta: float) -> void:
+	velocidade = get_input()
+	velocidade = velociade_calc(velocidade, speed)
+	velocidade = move_and_collide(velocidade)
+func get_input() -> Vector2:
+	var velociade = Vector2()
+	if Input.is_action_pressed(\"ui_left\"):
+		velociade.x -= 1
+	if Input.is_action_pressed(\"ui_right\"):
+		velociade.x += 1
+	if Input.is_action_pressed(\"ui_up\"):
+		velociade.y -= 1
+	if Input.is_action_pressed(\"ui_down\"):
+		velociade.y += 1
+	velocidade = velociade.normalized() * get_process_delta_time()
+	return velociade
+
+func velociade_calc(velocidade, speed) -> Vector2:
+	var out = velocidade
+	if out.x != 0:
+		out.x = out.x * speed
+	if out.y != 0:
+		out.y = out.y * speed
+	print(out)
+	return out
+
+
+func _on_dead_body_entered(body: Node) -> void:
+	emit_signal(\"hit\")
+"
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -25,6 +63,7 @@ radius = 15.9014
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 147.566, 68.116 )
+script = SubResource( 4 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -32,13 +71,15 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
+playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1.63125, 1.01954 )
 shape = SubResource( 2 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="dead" type="Area2D" parent="."]
 position = Vector2( -1.63125, 1.01954 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dead"]
 shape = SubResource( 3 )
+[connection signal="body_entered" from="dead" to="." method="_on_dead_body_entered"]
