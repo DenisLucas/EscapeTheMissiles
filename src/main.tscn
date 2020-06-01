@@ -11,7 +11,7 @@ extents = Vector2( 129.873, 10 )
 script = ExtResource( 3 )
 
 [node name="walls" type="StaticBody2D" parent="."]
-position = Vector2( 108.807, -5.46071 )
+position = Vector2( 123.468, -3.83168 )
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
@@ -33,9 +33,9 @@ shape = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 93.5658, 107.116 )
-collision_mask = 3
+collision_mask = 2
 
 [node name="misseis" parent="." instance=ExtResource( 2 )]
-position = Vector2( 147.024, 128.537 )
-collision_layer = 3
+position = Vector2( -2.78811, 104.594 )
+rotation = 1.5708
 [connection signal="hit" from="Player" to="." method="game_over"]

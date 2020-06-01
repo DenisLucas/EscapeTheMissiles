@@ -13,7 +13,7 @@
 script/source = "extends KinematicBody2D
 
 signal hit
-var speed = 100
+var speed = 200
 var velocidade = Vector2()
 
 func _physics_process(delta: float) -> void:
@@ -66,6 +66,7 @@ extents = Vector2( 8.25947, 12.1087 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 162.618, 34.2482 )
+collision_layer = 4
 collision_mask = 4
 script = SubResource( 4 )
 __meta__ = {
@@ -75,7 +76,7 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -88,7 +89,8 @@ shape = SubResource( 5 )
 
 [node name="dead" type="Area2D" parent="."]
 position = Vector2( -1.63126, 1.01953 )
-collision_mask = 3
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dead"]
 shape = SubResource( 2 )
