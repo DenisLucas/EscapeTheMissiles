@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://misseis.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/main.gd" type="Script" id=3]
+[ext_resource path="res://src/hud.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 129.873, 10 )
@@ -169,6 +170,90 @@ tracks/1/keys = {
 "values": [ -90.0, -90.0 ]
 }
 
+[sub_resource type="Animation" id=8]
+resource_name = "right_upside_down"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 200, -40.6117 ), Vector2( 200, -8.475 ), Vector2( 200, 200 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 180.0, 180.0 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "left_upside_down"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 40, -40 ), Vector2( 40, -8 ), Vector2( 40, 200 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 180.0, 180.0 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "right_downside_up"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 200, 202.798 ), Vector2( 200, 176 ), Vector2( 200, -40 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Left_downside_up"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 40, 202.798 ), Vector2( 40, 176 ), Vector2( 40, -40 ) ]
+}
+
 [node name="main" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -230,8 +315,32 @@ rotation = -1.5708
 [node name="AnimationPlayer" type="AnimationPlayer" parent="misseis4"]
 anims/right_left_down = SubResource( 7 )
 
-[node name="MissileTimer" type="Timer" parent="."]
-wait_time = 2.014
-one_shot = true
+[node name="misseis5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 200, -40.6117 )
+rotation = 3.14159
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="misseis5"]
+anims/right_upside_down = SubResource( 8 )
+
+[node name="misseis6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 40, -40 )
+rotation = 3.14159
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="misseis6"]
+anims/left_upside_down = SubResource( 9 )
+
+[node name="misseis7" parent="." instance=ExtResource( 2 )]
+position = Vector2( 200, 202.798 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="misseis7"]
+anims/right_downside_up = SubResource( 10 )
+
+[node name="misseis8" parent="." instance=ExtResource( 2 )]
+position = Vector2( 40, 202.798 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="misseis8"]
+anims/Left_downside_up = SubResource( 11 )
+
+[node name="Hud" parent="." instance=ExtResource( 4 )]
 [connection signal="hit" from="Player" to="." method="game_over"]
-[connection signal="timeout" from="MissileTimer" to="." method="_on_MissileTimer_timeout"]
+[connection signal="new_game" from="Hud" to="." method="new_game"]

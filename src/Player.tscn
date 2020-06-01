@@ -9,12 +9,15 @@
 [ext_resource path="res://assets/space ship/space ship 2.png" type="Texture" id=7]
 [ext_resource path="res://assets/space ship/space ship 3.png" type="Texture" id=8]
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
 
 signal hit
 var speed = 200
 var velocidade = Vector2()
+
+func _ready() -> void:
+	$\".\".hide()
 
 func _physics_process(delta: float) -> void:
 	velocidade = get_input()
@@ -54,9 +57,17 @@ func _on_dead_body_entered(body: Node) -> void:
 		emit_signal(\"hit\")
 	elif body.name == \"misseis4\":
 		emit_signal(\"hit\")	
+	elif body.name == \"misseis5\":
+		emit_signal(\"hit\")	
+	elif body.name == \"misseis6\":
+		emit_signal(\"hit\")	
+	elif body.name == \"misseis7\":
+		emit_signal(\"hit\")	
+	elif body.name == \"misseis8\":
+		emit_signal(\"hit\")	
 "
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 4 ) ],
 "loop": true,
@@ -64,34 +75,34 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 1.17461, 13.922 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 8.25947, 12.1087 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 162.618, 34.2482 )
 collision_layer = 4
 collision_mask = 4
-script = SubResource( 4 )
+script = SubResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -12.2006, 0.225933 )
-shape = SubResource( 5 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2( 8.81149, 0.903744 )
-shape = SubResource( 5 )
+shape = SubResource( 3 )
 
 [node name="dead" type="Area2D" parent="."]
 position = Vector2( -1.63126, 1.01953 )
@@ -99,5 +110,5 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dead"]
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 [connection signal="body_entered" from="dead" to="." method="_on_dead_body_entered"]

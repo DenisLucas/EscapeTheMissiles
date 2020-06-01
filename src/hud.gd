@@ -1,0 +1,8 @@
+extends CanvasLayer
+
+signal new_game
+
+
+func _on_Button_pressed() -> void:
+	emit_signal("new_game")
+	
